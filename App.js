@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import SplashScreen from 'react-native-splash-screen'
 import { StyleSheet, Text, View, Button, Alert, FlatList, ActivityIndicator, SafeAreaView } from 'react-native';
 import { red } from 'ansi-colors';
+import Splash from "./SplashScreen";
 
 
 class List extends Component {
@@ -38,7 +39,7 @@ export default class App extends Component {
     super(props)
 
     this.state = {
-
+      isSplashLoading: true,
       jsonData: {
         "title": "The Basics - Networking",
         "description": "Your app fetched this from a remote endpoint!",
@@ -72,13 +73,33 @@ export default class App extends Component {
 
   }
 
-  componentDidMount() {
-    // do stuff while splash screen is shown
-    // After having done stuff (such as async tasks) hide the splash screen
+  async componentDidMount() {
     SplashScreen.hide();
+
+    // Preload data from an external API
+    // Preload data using AsyncStorage
+    const data = await this.performTimeConsumingTask();
+
+    if (data !== null) {
+      this.setState({ isSplashLoading: false });
+    }
+
+
+}
+
+  performTimeConsumingTask = async () => {
+    return new Promise((resolve) =>
+      setTimeout(
+        () => { resolve('result') },
+        2000
+      ));
   }
 
   render() {
+    if (this.state.isSplashLoading) {
+      return (<Splash />);
+    }
+    
     if (this.state.isLoading) {
       return (
         <View style={{ flex: 1, padding: 200 }}>
@@ -89,6 +110,7 @@ export default class App extends Component {
         </View>
       )
     }
+
     return (
       <View style={styles.container}>
         <SafeAreaView style={{ flex: 1, backgroundColor: '#f5f098' }}>
