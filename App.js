@@ -73,7 +73,7 @@ export default class App extends Component {
 componentDidMount() {
     	// do stuff while splash screen is shown
         // After having done stuff (such as async tasks) hide the splash screen
-        SplashScreen.hide();
+       SplashScreen.hide();
     }
 
 render() {
@@ -89,7 +89,7 @@ render() {
   }
   return (
     <View style={styles.container}>
-    <SafeAreaView style={{flex: 1, backgroundColor: '#fff'}}>
+    <SafeAreaView style={{flex: 1, backgroundColor: '#f5f098'}}>
     <View >
     <Text>API and Listing data</Text>
     </View>
@@ -108,7 +108,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'center',
-
+backgroundColor:'#f5f098',
     margin: 10
   },
   listItems: {
