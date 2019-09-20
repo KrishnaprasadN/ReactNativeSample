@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import SplashScreen from 'react-native-splash-screen'
 import { StyleSheet, Text, View, Button, Alert, FlatList, ActivityIndicator, SafeAreaView } from 'react-native';
 import { red } from 'ansi-colors';
 import Splash from "./SplashScreen";
@@ -74,8 +73,6 @@ export default class App extends Component {
   }
 
   async componentDidMount() {
-    SplashScreen.hide();
-
     // Preload data from an external API
     // Preload data using AsyncStorage
     const data = await this.performTimeConsumingTask();
@@ -83,9 +80,7 @@ export default class App extends Component {
     if (data !== null) {
       this.setState({ isSplashLoading: false });
     }
-
-
-}
+  }
 
   performTimeConsumingTask = async () => {
     return new Promise((resolve) =>
@@ -99,7 +94,7 @@ export default class App extends Component {
     if (this.state.isSplashLoading) {
       return (<Splash />);
     }
-    
+
     if (this.state.isLoading) {
       return (
         <View style={{ flex: 1, padding: 200 }}>
