@@ -1,158 +1,165 @@
-import React, { Component } from 'react';
-import { StyleSheet, Text, View, Button, Alert, FlatList, ActivityIndicator, SafeAreaView } from 'react-native';
-import { red } from 'ansi-colors';
-import Splash from "./SplashScreen";
+/*import React from 'react';
+import { View, Text, Button } from 'react-native';
+import { createAppContainer } from 'react-navigation';
+import { createStackNavigator } from 'react-navigation-stack';
 
 
-class List extends Component {
+class HomeScreen extends React.Component {
+  static navigationOptions = {
+    title: 'Home',
+  };
   render() {
     return (
-      <View style={styles.container}>
-        <FlatList
-          data={this.props.data.jsonData.movies}
-          renderItem={
-            ({ item }) => <Text style={styles.listItems}>{item.title}</Text>
-          }
-          keyExtractor={item => item.id}
+      <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+        <Text>Home Screen</Text>
+        <Button
+          title="Go to Details"
+          onPress={() => this.props.navigation.navigate('Details')}
         />
       </View>
     );
   }
 }
 
-
-export default class App extends Component {
-
+class DetailsScreen extends React.Component {
   static navigationOptions = {
-    title: "Home",
-    headerStyle: {
-      backgroundColor: "#03A9F4"
-    },
-    headerTintColor: "#fff",
-    headerTitleStyle: {
-      fontWeight: "bold"
-    }
+    title: 'Details',
   };
-
-  constructor(props) {
-    super(props)
-
-    this.state = {
-      isSplashLoading: true,
-      jsonData: {
-        "title": "The Basics - Networking",
-        "description": "Your app fetched this from a remote endpoint!",
-        "movies": [
-          { "id": "1", "title": "Star Wars", "releaseYear": "1977" },
-          { "id": "2", "title": "Back to the Future", "releaseYear": "1985" },
-          { "id": "3", "title": "12345", "releaseYear": "1982" },
-        ]
-      },
-      isLoading: false
-    };
-  }
-
-  SampleFunction2(StringHolder) {
-    this.setState({
-      isLoading: true
-    }
-    );
-    return fetch('https://facebook.github.io/react-native/movies.json')
-      .then((response) => response.json())
-      .then((responseJson) => {
-        this.setState({
-          jsonData: responseJson,
-          isLoading: false
-        }
-        );
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-
-  }
-
-  async componentDidMount() {
-    // Preload data from an external API
-    // Preload data using AsyncStorage
-    const data = await this.performTimeConsumingTask();
-
-    if (data !== null) {
-      this.setState({ isSplashLoading: false });
-    }
-  }
-
-  performTimeConsumingTask = async () => {
-    return new Promise((resolve) =>
-      setTimeout(
-        () => { resolve('result') },
-        2000
-      ));
-  }
-
   render() {
-    if (this.state.isSplashLoading) {
-      return (<Splash />);
-    }
-
-    if (this.state.isLoading) {
-      return (
-        <View style={{ flex: 1, padding: 200 }}>
-          <ActivityIndicator
-            color='#bc2b78'
-            size="large"
-            style={styles.activityIndicator} />
-        </View>
-      )
-    }
-
     return (
-      <View style={styles.container}>
-        <SafeAreaView style={{ flex: 1, backgroundColor: '#f5f098' }}>
-          <View >
-            <Text>API and Listing data</Text>
-          </View>
-        </SafeAreaView>
-        < List data={this.state} />
-        <View style={{ margin: 10 }}>
-          <Button onPress={this.SampleFunction2.bind(this, "Function With Argument Text")} title=" Get Movies list " />
-        </View>
+      <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+        <Text>Details Screen</Text>
       </View>
     );
   }
 }
 
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    backgroundColor: '#f5f098',
-    margin: 10
-  },
-  listItems: {
-    flex: 1,
-    color: '#bc2b78',
-    fontWeight: 'bold',
-    fontSize: 15,
-    justifyContent: 'center',
-    backgroundColor: '#33ECFF',
-    borderRadius: 4,
-    borderWidth: 0.5,
-    borderColor: '#d6d7da',
-    height: 30
-  },
-  homeTitle: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    height: 30,
-    color: '#FF3333'
-  },
-  activityIndicator: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    height: 200
+class Right extends React.Component {
+  render() {
+    return (
+      <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+        <Text>{this.props.title}</Text>
+      </View>
+    );
   }
-});
+}
+
+const AppNavigator = createStackNavigator(
+  {
+    Home: {
+      screen: HomeScreen,
+      navigationOptions: () => ({
+        title: `A`,
+        headerBackTitle:  `A`,
+        headerRight: <Right title={"Right"}></Right>,
+        headerLeft: <Right title={"Left"}></Right>,
+      }),
+    },
+    Details: {
+      screen: DetailsScreen
+    },
+  },
+  {
+    initialRouteName: 'Home',
+  }
+);
+
+export default createAppContainer(AppNavigator); */
+
+/*
+import React from 'react';
+import { Text, View } from 'react-native';
+import { createAppContainer } from 'react-navigation';
+import { createBottomTabNavigator } from 'react-navigation-tabs';
+
+class HomeScreen extends React.Component {
+  render() {
+    return (
+      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+        <Text>Home!</Text>
+      </View>
+    );
+  }
+}
+
+class SettingsScreen extends React.Component {
+  render() {
+    return (
+      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+        <Text>Settings!</Text>
+      </View>
+    );
+  }
+}
+
+const TabNavigator = createBottomTabNavigator(
+  {
+    Home: HomeScreen,
+    Settings: SettingsScreen,
+  },
+  {
+    tabBarOptions: {
+      activeTintColor: '#000000',
+      inactiveTintColor: '#808080',
+      labelStyle: {
+        fontSize: 24,
+      },
+    }
+  }
+
+);
+
+export default createAppContainer(TabNavigator); */
+
+/*
+import React from 'react';
+import { View, Text, Button } from 'react-native';
+import { createAppContainer } from 'react-navigation';
+import { createDrawerNavigator } from 'react-navigation-drawer';
+
+class HomeScreen extends React.Component {
+  static navigationOptions = {
+    title: 'Home',
+  };
+  render() {
+    return (
+      <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+        <Text>Home Screen</Text>
+        <Button
+          title="Go to Details"
+          onPress={() => this.props.navigation.navigate('Details')}
+        />
+      </View>
+    );
+  }
+}
+
+class DetailsScreen extends React.Component {
+  static navigationOptions = {
+    title: 'Details',
+  };
+  render() {
+    return (
+      <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+        <Text>Details Screen</Text>
+      </View>
+    );
+  }
+}
+
+const AppNavigator = createDrawerNavigator(
+  {
+    Home: {
+      screen: HomeScreen,
+    },
+    Details: {
+      screen: DetailsScreen
+    },
+  },
+  {
+    initialRouteName: 'Home',
+  }
+);
+
+export default createAppContainer(AppNavigator);
+*/
